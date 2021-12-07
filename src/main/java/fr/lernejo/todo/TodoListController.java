@@ -10,7 +10,7 @@ public class TodoListController {
 
     private final List<Todo> todoList = new ArrayList<Todo>();
 
-    @RequestMapping(value = ("/api/todo"), method=RequestMethod.POST, consumes = {"application/json"})
+    @RequestMapping(value = ("/api/todo"), method=RequestMethod.POST)
     public void addTodo(@RequestBody Todo todo) {
         todoList.add(todo);
     }
