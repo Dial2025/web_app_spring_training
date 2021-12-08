@@ -8,16 +8,20 @@ import java.util.List;
 @RestController
 public class TodoListController {
 
-    private final List<Todo> todoList = new ArrayList<Todo>();
+    private final TodoRepository repository;
+
+    public TodoListController(TodoRepository repo) {
+        this.repository = repo;
+    }
 
     @RequestMapping(value = ("/api/todo"), method=RequestMethod.POST)
-    public void addTodo(@RequestBody Todo todo) {
-        todoList.add(todo);
+    public void addTodo(@RequestBody TodoEntity newTodo) {
+        this.repository.save(newTodo);
     }
 
     @RequestMapping(value = ("/api/todo"),  method=RequestMethod.GET)
-    public List<Todo> viewTodo() {
-        return todoList;
+    public Iterable<TodoEntity> getTodoList() {
+        return this.repository.findAll();
     }
 }
 
